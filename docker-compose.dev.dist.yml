@@ -14,6 +14,9 @@ services:
       PHP_IDE_CONFIG: serverName=sylius
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      mysql:
+        condition: service_healthy
     volumes:
       - .:/srv/sylius:rw,cached
       - public-media:/srv/sylius/public/media:rw
@@ -52,6 +55,11 @@ services:
       - js
   
   mysql:
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --execute \"SHOW databases;\""
+      timeout: 5s
+      interval: 5s
+      retries: 5
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
@@ -60,5 +68,3 @@ services:
       - "3306:3306"
     networks:
       - mysql
-
-
