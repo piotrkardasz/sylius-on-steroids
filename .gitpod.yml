@@ -27,4 +27,12 @@ ports:
     visibility: public
     protocol: https
 
-
+jetbrains:
+  phpstorm:
+    plugins:
+      - de.espend.idea.php.annotation
+      - com.kalessil.phpStorm.phpInspectionsEA
+      - de.espend.idea.php.toolbox
+      - de.espend.idea.php.phpunit
+      - fr.adrienbrault.idea.symfony2plugin
+      - de.netnexus.camelcaseplugin
