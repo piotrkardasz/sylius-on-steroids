@@ -4,9 +4,15 @@
     </a>
 </p>
 
-<h1 align="center">Sylius Standard Edition</h1>
+<h1 align="center">Sylius on Steroids</h1>
 
-<p align="center">This is Sylius Standard Edition repository for starting new projects.</p>
+<p align="center">This is Sylius Standard Edition but on steroids loaded with GitPod configuration</p>
+
+## Next Steps
+
+Click the button below to start rapidly a new remote pre-configured development environment of Sylius with Gitpod :rocket:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/piotrkardasz/sylius-on-steroids)
 
 ## About
 
