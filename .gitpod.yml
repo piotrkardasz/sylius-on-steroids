@@ -1,0 +1,30 @@
+tasks:
+  - name: Setup Sylius
+    init: |
+      cp ./docker-compose.dev.dist.yml ./docker-compose.override.yml
+      docker-compose pull || true
+      docker-compose run --rm php composer install --no-interaction
+      docker-compose run --rm nodejs
+      docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+      docker-compose exec php bin/console doctrine:database:drop --if-exists --force
+      docker-compose exec php bin/console doctrine:database:create
+      docker-compose exec php bin/console doctrine:migrations:sync-metadata-storage --no-interaction
+      docker-compose exec php bin/console doctrine:migrations:migrate --no-interaction
+      docker-compose exec php bin/console sylius:install --fixture-suite default --no-interaction
+      docker-compose exec php bin/console assets:install --no-interaction
+      docker-compose exec php bin/console sylius:install:assets --no-interaction
+      docker-compose exec php mkdir -p /srv/sylius/public/media/image
+      docker-compose exec php bin/console sylius:theme:assets:install public --no-interaction
+      docker-compose exec php bin/console lexik:jwt:generate-keypair --skip-if-exists --no-interaction
+    command: |
+      docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+
+ports:
+  - port: 80
+    onOpen: open-preview
+    name: Sylius
+    description: Sylius Preview
+    visibility: public
+    protocol: https
+
+
