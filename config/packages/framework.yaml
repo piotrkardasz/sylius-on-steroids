@@ -1,4 +1,10 @@
+parameters:
+    router.request_context.scheme: 'https'
+    asset.request_context.secure: true
+    
 framework:
+    trusted_proxies: '127.0.0.1,192.0.0.1,10.0.0.0/8,172.0.0.0/24,REMOTE_ADDR'
+    trusted_headers: [ 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-prefix' ]
     translator: { fallbacks: ["%locale%"] }
     secret: '%env(APP_SECRET)%'
     form:
